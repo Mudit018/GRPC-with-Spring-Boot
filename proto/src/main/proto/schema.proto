@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package com.eddiction;
-
 option java_multiple_files = true;
+
+package com.eddiction;
 
 message Book {
   int32 book_id = 1;
@@ -19,14 +19,20 @@ message Author {
   string gender = 4;
   int32 book_id = 5;
 }
-
 service BookAuthorService {
   // unary - synchronous
   // client will send one request and server will respond with one response
   rpc getAuthor(Author) returns (Author){}
 
   // server streaming - asynchronous
-  // client streaming - asynchronous
-  // bi-directional streaming - asynchronous
+  // client will send one response and server will respond a stream of messages
+  rpc getBooksByAuthor(Author) returns (stream Book){}
 
+  // client streaming - asynchronous
+  // client will send stream of messages and server will respond with a single message
+  rpc getExpensiveBook(stream Book) returns (Book){}
+
+  // bi-directional streaming - asynchronous
+  // client will send a stream of messages and the server will respond back with a stream of messages
+  rpc getBookByAuthorGender(stream Book) returns (stream Book){}
 }

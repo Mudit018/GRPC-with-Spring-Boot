@@ -1,4 +1,4 @@
-package com.eddiction.service;
+package com.eddiction.grpc.client.service;
 
 import com.eddiction.Author;
 import com.eddiction.BookAuthorServiceGrpc;
